@@ -1,0 +1,21 @@
+apiVersion: v2
+name: mcp-pagerduty
+description: PagerDuty MCP Server (Giant Swarm packaging) — exposes the upstream MCP server over HTTP for in-cluster muster integration.
+type: application
+version: 0.1.0
+appVersion: "0.17.0-gs.0"
+home: https://github.com/giantswarm/pagerduty-mcp-server
+icon: https://s.giantswarm.io/app-icons/giantswarm/1/dark.svg
+maintainers:
+  - name: Giant Swarm
+    email: support@giantswarm.io
+keywords:
+  - mcp
+  - pagerduty
+  - ai
+  - claude
+sources:
+  - https://github.com/giantswarm/pagerduty-mcp-server
+  - https://github.com/PagerDuty/pagerduty-mcp-server
+annotations:
+  application.giantswarm.io/team: team-honeybadger

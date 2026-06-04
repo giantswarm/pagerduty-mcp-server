@@ -1,0 +1,36 @@
+{{- if .Values.ciliumNetworkPolicy.enabled -}}
+apiVersion: cilium.io/v2
+kind: CiliumNetworkPolicy
+metadata:
+  name: {{ include "mcp-pagerduty.fullname" . }}
+  labels:
+    {{- include "mcp-pagerduty.labels" . | nindent 4 }}
+spec:
+  endpointSelector:
+    matchLabels:
+      {{- include "mcp-pagerduty.selectorLabels" . | nindent 6 }}
+  ingress:
+    # Allow muster (and anything else in-cluster the user configures) to reach the MCP endpoint.
+    - fromEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: muster
+  egress:
+    # DNS
+    - toEndpoints:
+        - matchLabels:
+            k8s:io.kubernetes.pod.namespace: kube-system
+            k8s:k8s-app: kube-dns
+      toPorts:
+        - ports:
+            - port: "53"
+              protocol: UDP
+            - port: "53"
+              protocol: TCP
+    # PagerDuty API (egress to internet).
+    - toFQDNs:
+        - matchPattern: "*.pagerduty.com"
+      toPorts:
+        - ports:
+            - port: "443"
+              protocol: TCP
+{{- end }}
