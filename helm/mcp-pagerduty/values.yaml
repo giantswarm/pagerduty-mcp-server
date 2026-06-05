@@ -1,0 +1,104 @@
+# Default values for pagerduty-mcp-server
+
+replicaCount: 1
+
+image:
+  repository: gsoci.azurecr.io/giantswarm/pagerduty-mcp-server
+  pullPolicy: IfNotPresent
+  tag: ""  # Defaults to appVersion
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  automount: false
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+podLabels: {}
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  seccompProfile:
+    type: RuntimeDefault
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 8080
+  annotations: {}
+
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+    ephemeral-storage: 100Mi
+  requests:
+    cpu: 50m
+    memory: 128Mi
+    ephemeral-storage: 10Mi
+
+# tcpSocket probes: FastMCP's /mcp endpoint requires POST with a JSON-RPC body,
+# so plain HTTP GET liveness probes would fail. TCP-level checks confirm the
+# server bound the port.
+livenessProbe:
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+readinessProbe:
+  tcpSocket:
+    port: http
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+
+# Network policies (disabled by default; enable per-cluster as needed)
+ciliumNetworkPolicy:
+  enabled: false
+
+# MCP server configuration
+mcp:
+  # Transport: stdio (not useful for in-cluster), sse, or streamable-http.
+  # streamable-http is what muster expects for remote MCP servers.
+  transport: streamable-http
+  host: 0.0.0.0
+  port: 8080
+  # WARNING: leave this false. The whole point of this deployment is read-only access.
+  enableWriteTools: false
+
+# PagerDuty API configuration
+pagerduty:
+  # EU region by default (Giant Swarm). Set to https://api.pagerduty.com for US accounts.
+  apiHost: https://api.eu.pagerduty.com
+  # Reference an existing Secret containing the PagerDuty User API token.
+  # Create with:
+  #   kubectl create secret generic pagerduty-mcp \
+  #     --namespace mcp-pagerduty \
+  #     --from-literal=apiKey=<your-token>
+  existingSecret:
+    name: pagerduty-mcp
+    key: apiKey

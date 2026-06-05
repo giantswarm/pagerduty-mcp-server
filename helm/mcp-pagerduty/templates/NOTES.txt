@@ -1,0 +1,21 @@
+PagerDuty MCP Server ({{ .Chart.AppVersion }}) installed as {{ include "mcp-pagerduty.fullname" . }}.
+
+Read-only mode: {{ if .Values.mcp.enableWriteTools }}DISABLED — write tools are enabled, which contradicts the purpose of this deployment{{ else }}enabled (safe default){{ end }}
+
+In-cluster MCP endpoint:
+  http://{{ include "mcp-pagerduty.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+
+Register with muster by applying an MCPServer resource:
+
+  apiVersion: muster.giantswarm.io/v1alpha1
+  kind: MCPServer
+  metadata:
+    name: gazelle-mcp-pagerduty
+    namespace: muster
+  spec:
+    type: {{ .Values.mcp.transport }}
+    url: http://{{ include "mcp-pagerduty.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+    timeout: 30
+    autoStart: true
+    toolPrefix: pd
+    description: Read-only PagerDuty MCP for incident troubleshooting
