@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "pagerduty-mcp-server.fullname" . }}
+  name: {{ include "mcp-pagerduty.fullname" . }}
   labels:
-    {{- include "pagerduty-mcp-server.labels" . | nindent 4 }}
+    {{- include "mcp-pagerduty.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "pagerduty-mcp-server.selectorLabels" . | nindent 6 }}
+      {{- include "mcp-pagerduty.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "pagerduty-mcp-server.labels" . | nindent 8 }}
+        {{- include "mcp-pagerduty.labels" . | nindent 8 }}
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
@@ -27,14 +27,14 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "pagerduty-mcp-server.serviceAccountName" . }}
+      serviceAccountName: {{ include "mcp-pagerduty.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ include "pagerduty-mcp-server.imageTag" . }}"
+          image: "{{ .Values.image.repository }}:{{ include "mcp-pagerduty.imageTag" . }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           args:
             - "--transport={{ .Values.mcp.transport }}"

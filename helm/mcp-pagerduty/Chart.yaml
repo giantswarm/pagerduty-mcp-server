@@ -1,5 +1,5 @@
 apiVersion: v2
-name: pagerduty-mcp-server
+name: mcp-pagerduty
 description: PagerDuty MCP Server (Giant Swarm packaging) — exposes the upstream MCP server over HTTP for in-cluster muster integration.
 type: application
 version: 0.1.0

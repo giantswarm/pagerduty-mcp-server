@@ -18,14 +18,14 @@ workflows:
             tags:
               only: /^v.*/
 
-      # Package the Helm chart (helm/pagerduty-mcp-server) and push it to the
+      # Package the Helm chart (helm/mcp-pagerduty) and push it to the
       # Giant Swarm app catalogs. main → control-plane-test-catalog,
       # tags → control-plane-catalog.
       - architect/push-to-app-catalog:
           name: push-to-app-catalog
           executor: app-build-suite
           context: architect
-          chart: pagerduty-mcp-server
+          chart: mcp-pagerduty
           app_catalog: control-plane-catalog
           app_catalog_test: control-plane-test-catalog
           requires:
