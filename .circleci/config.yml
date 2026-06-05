@@ -1,0 +1,37 @@
+version: 2.1
+
+orbs:
+  architect: giantswarm/architect@9.1.0
+
+workflows:
+  build:
+    jobs:
+      # Build the Docker image from the upstream Dockerfile and push it to
+      # the Giant Swarm container registry. No prior go-build step is needed
+      # since the Dockerfile fully builds the Python image itself.
+      - architect/push-to-registries:
+          name: push-to-registries
+          context: architect
+          filters:
+            branches:
+              only: main
+            tags:
+              only: /^v.*/
+
+      # Package the Helm chart (helm/mcp-pagerduty) and push it to the
+      # Giant Swarm app catalogs. main → control-plane-test-catalog,
+      # tags → control-plane-catalog.
+      - architect/push-to-app-catalog:
+          name: push-to-app-catalog
+          executor: app-build-suite
+          context: architect
+          chart: mcp-pagerduty
+          app_catalog: control-plane-catalog
+          app_catalog_test: control-plane-test-catalog
+          requires:
+            - push-to-registries
+          filters:
+            branches:
+              only: main
+            tags:
+              only: /^v.*/
