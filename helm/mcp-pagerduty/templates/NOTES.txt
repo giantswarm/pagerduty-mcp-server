@@ -13,7 +13,7 @@ Register with muster by applying an MCPServer resource:
     name: gazelle-mcp-pagerduty
     namespace: muster
   spec:
-    type: streamable-http
+    type: {{ .Values.mcp.transport }}
     url: http://{{ include "mcp-pagerduty.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
     timeout: 30
     autoStart: true
