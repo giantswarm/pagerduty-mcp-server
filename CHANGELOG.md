@@ -22,4 +22,4 @@ see [`PagerDuty/pagerduty-mcp-server`](https://github.com/PagerDuty/pagerduty-mc
   `gsoci.azurecr.io` registry.
 - `CHANGELOG.md` (this file).
 
-[Unreleased]: https://github.com/giantswarm/pagerduty-mcp-server/commits/main
+[Unreleased]: https://github.com/giantswarm/pagerduty-mcp-server/tree/main
