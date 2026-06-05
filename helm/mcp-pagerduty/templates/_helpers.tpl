@@ -64,5 +64,5 @@ Service account name.
 Image tag.
 */}}
 {{- define "mcp-pagerduty.imageTag" -}}
-{{- default .Chart.AppVersion .Values.image.tag }}
+{{- default .Chart.AppVersion .Values.image.tag -}}
 {{- end }}
