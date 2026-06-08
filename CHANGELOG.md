@@ -10,6 +10,8 @@ see [`PagerDuty/pagerduty-mcp-server`](https://github.com/PagerDuty/pagerduty-mc
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-06-05
+
 ### Added
 
 - HTTP / SSE / streamable-http transport support via new `--transport`,
@@ -22,4 +24,5 @@ see [`PagerDuty/pagerduty-mcp-server`](https://github.com/PagerDuty/pagerduty-mc
   `gsoci.azurecr.io` registry.
 - `CHANGELOG.md` (this file).
 
-[Unreleased]: https://github.com/giantswarm/pagerduty-mcp-server/tree/main
+[Unreleased]: https://github.com/giantswarm/pagerduty-mcp-server/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/giantswarm/pagerduty-mcp-server/releases/tag/v1.0.0
