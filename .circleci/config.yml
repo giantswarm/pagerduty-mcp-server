@@ -12,6 +12,7 @@ workflows:
       - architect/push-to-registries:
           name: push-to-registries
           context: architect
+          split-china-push: true
           filters:
             branches:
               only: main
