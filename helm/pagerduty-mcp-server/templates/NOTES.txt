@@ -1,9 +1,9 @@
-PagerDuty MCP Server ({{ .Chart.AppVersion }}) installed as {{ include "mcp-pagerduty.fullname" . }}.
+PagerDuty MCP Server ({{ .Chart.AppVersion }}) installed as {{ include "pagerduty-mcp-server.fullname" . }}.
 
 Read-only mode: {{ if .Values.mcp.enableWriteTools }}DISABLED — write tools are enabled, which contradicts the purpose of this deployment{{ else }}enabled (safe default){{ end }}
 
 In-cluster MCP endpoint:
-  http://{{ include "mcp-pagerduty.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+  http://{{ include "pagerduty-mcp-server.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
 
 Register with muster by applying an MCPServer resource:
 
@@ -14,7 +14,7 @@ Register with muster by applying an MCPServer resource:
     namespace: muster
   spec:
     type: {{ .Values.mcp.transport }}
-    url: http://{{ include "mcp-pagerduty.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
+    url: http://{{ include "pagerduty-mcp-server.fullname" . }}.{{ .Release.Namespace }}.svc.cluster.local:{{ .Values.service.port }}/mcp
     timeout: 30
     autoStart: true
     toolPrefix: pd

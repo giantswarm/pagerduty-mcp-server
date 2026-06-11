@@ -2,13 +2,13 @@
 apiVersion: cilium.io/v2
 kind: CiliumNetworkPolicy
 metadata:
-  name: {{ include "mcp-pagerduty.fullname" . }}
+  name: {{ include "pagerduty-mcp-server.fullname" . }}
   labels:
-    {{- include "mcp-pagerduty.labels" . | nindent 4 }}
+    {{- include "pagerduty-mcp-server.labels" . | nindent 4 }}
 spec:
   endpointSelector:
     matchLabels:
-      {{- include "mcp-pagerduty.selectorLabels" . | nindent 6 }}
+      {{- include "pagerduty-mcp-server.selectorLabels" . | nindent 6 }}
   ingress:
     # Allow muster (and anything else in-cluster the user configures) to reach the MCP endpoint.
     - fromEndpoints:

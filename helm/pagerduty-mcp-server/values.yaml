@@ -8,8 +8,8 @@ image:
   tag: ""  # Defaults to appVersion
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: mcp-pagerduty
+fullnameOverride: mcp-pagerduty
 
 serviceAccount:
   create: true
