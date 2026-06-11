@@ -8,14 +8,14 @@
 
 name: Upload Python Package
 
-on: 
+on:
   workflow_dispatch:
     inputs:
       environment:
         description: 'PyPi Environment'
         required: true
         type: choice
-        options: 
+        options:
         - Testing
         - Production
 
@@ -72,7 +72,7 @@ jobs:
           python-version-file: "pyproject.toml"
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-        
+
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
@@ -103,7 +103,7 @@ jobs:
           python-version-file: "pyproject.toml"
           enable-cache: true
           cache-dependency-glob: "uv.lock"
-        
+
       - name: Retrieve release distributions
         uses: actions/download-artifact@v4
         with:
@@ -112,6 +112,3 @@ jobs:
 
       - name: Publish release distributions to PyPi
         run: uv publish --publish-url https://test.pypi.org/legacy/ --token ${{ secrets.PYPI_TOKEN_TESTING }}
-
-
-      
