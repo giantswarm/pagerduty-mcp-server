@@ -66,7 +66,7 @@ See [mcp-apps/README.md](mcp-apps/README.md) for development instructions and cu
 ## Prerequisites
 
 *   [asdf-vm](https://asdf-vm.com/) installed.
-*   [uv](https://github.com/astral-sh/uv) installed globally. 
+*   [uv](https://github.com/astral-sh/uv) installed globally.
 *   A PagerDuty **User API Token**.
     To obtain a PagerDuty User API Token, follow these steps:
 
@@ -127,7 +127,7 @@ You can configure this MCP server directly within Visual Studio Code's `settings
                 }
             ],
             "servers": {
-                "pagerduty-mcp": { 
+                "pagerduty-mcp": {
                     "type": "stdio",
                     "command": "uvx",
                     "args": [
@@ -294,7 +294,7 @@ The default remains `stdio` so existing local integrations are unaffected.
 
 ## Set up locally
 
-1.  **Clone the repository** 
+1.  **Clone the repository**
 
 2. **Install `asdf` plugins**
     ```shell
@@ -315,7 +315,7 @@ The default remains `stdio` so existing local integrations are unaffected.
     ```
 
 5.  **Ensure `uv` is available globally.**
-    
+
     The MCP server can be run from different places so you need `uv` to be available globally. To do so, follow the [official documentation](https://docs.astral.sh/uv/getting-started/installation/).
 
 
@@ -323,17 +323,17 @@ The default remains `stdio` so existing local integrations are unaffected.
 
 6. Run it locally
 
-    To run your cloned PagerDuty MCP Server you need to update your configuration to use `uv` instead of `uvx`. 
+    To run your cloned PagerDuty MCP Server you need to update your configuration to use `uv` instead of `uvx`.
 
     ```json
-    "pagerduty-mcp": { 
+    "pagerduty-mcp": {
         "type": "stdio",
         "command": "uv",
         "args": [
             "run",
             "--directory",
             "/path/to/your/mcp-server-directory",
-            // Replace with the full path to the directory where you cloned the MCP server, e.g. "/Users/yourname/code/mcp-server",     
+            // Replace with the full path to the directory where you cloned the MCP server, e.g. "/Users/yourname/code/mcp-server",
             "python",
             "-m",
             "pagerduty_mcp",

@@ -1,14 +1,14 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mcp-pagerduty.name" -}}
+{{- define "pagerduty-mcp-server.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Create a default fully qualified app name.
 */}}
-{{- define "mcp-pagerduty.fullname" -}}
+{{- define "pagerduty-mcp-server.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -24,16 +24,16 @@ Create a default fully qualified app name.
 {{/*
 Chart label.
 */}}
-{{- define "mcp-pagerduty.chart" -}}
+{{- define "pagerduty-mcp-server.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels.
 */}}
-{{- define "mcp-pagerduty.labels" -}}
-helm.sh/chart: {{ include "mcp-pagerduty.chart" . }}
-{{ include "mcp-pagerduty.selectorLabels" . }}
+{{- define "pagerduty-mcp-server.labels" -}}
+helm.sh/chart: {{ include "pagerduty-mcp-server.chart" . }}
+{{ include "pagerduty-mcp-server.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -44,17 +44,17 @@ application.giantswarm.io/team: {{ index .Chart.Annotations "application.giantsw
 {{/*
 Selector labels.
 */}}
-{{- define "mcp-pagerduty.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "mcp-pagerduty.name" . }}
+{{- define "pagerduty-mcp-server.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "pagerduty-mcp-server.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Service account name.
 */}}
-{{- define "mcp-pagerduty.serviceAccountName" -}}
+{{- define "pagerduty-mcp-server.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "mcp-pagerduty.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "pagerduty-mcp-server.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -63,6 +63,6 @@ Service account name.
 {{/*
 Image tag.
 */}}
-{{- define "mcp-pagerduty.imageTag" -}}
+{{- define "pagerduty-mcp-server.imageTag" -}}
 {{- default .Chart.AppVersion .Values.image.tag -}}
 {{- end }}
