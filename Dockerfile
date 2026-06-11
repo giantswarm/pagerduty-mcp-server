@@ -2,7 +2,7 @@
 # Based on uv best practices for Python 3.12
 
 # Stage 1: Builder - Install dependencies and project
-FROM python:3.12-slim AS builder
+FROM python:3.14-slim AS builder
 
 WORKDIR /app
 
@@ -22,7 +22,7 @@ RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --compile-bytecode
 
 # Stage 2: Runtime - Minimal production image
-FROM python:3.12-slim
+FROM python:3.14-slim
 
 WORKDIR /app
 
