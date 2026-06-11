@@ -13,7 +13,7 @@
 ## **Do you intend to add a new feature or change an existing one?**
 
 * Check for a similar feature request on the [issues](https://github.com/pagerduty/pagerduty-mcp-server/issues) page.
-  
+
 * If you can't find it, open an issue on GitHub using the [Feature Request](https://github.com/pagerduty/pagerduty-mcp-server/issues/new?assignees=&labels=enhancement&projects=&template=feature_request.md&title=) template.
 
 * Provide as much details as possible so the request can be analysed by the team.
@@ -69,7 +69,7 @@ python tests/evals/run_tests.py
 Once you're done with your changes, you can open a pull request. Make sure to follow the checklist inside the pull request template.
 
 Create a commit with your changes and push them to a new branch/fork then create a [pull request on GitHub](https://docs.github.com/en/github/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
-  
+
   > **Note:** Core members can push directly to a branch on the repo (following the same conventions detailed below).
 
 Pull request title and message (and PR title and description) must adhere to [conventional commits](https://www.conventionalcommits.org), this is enforced by the CI. This is a summary of the rules:
