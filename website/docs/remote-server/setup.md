@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Remote MCP Server Setup
 
-The **PagerDuty Remote MCP Server** is a PagerDuty-hosted service that lets you connect your AI assistant to PagerDuty without installing anything locally. 
+The **PagerDuty Remote MCP Server** is a PagerDuty-hosted service that lets you connect your AI assistant to PagerDuty without installing anything locally.
 
 It supports both OAuth and API keys for authentication (including OAuth metadata discovery), making it easy to set up across teams and enterprise environments.
 
@@ -36,7 +36,7 @@ Generally, both user and account-level credentials are supported, although some 
 
 To authorize via an API token, provide a custom header: `Authorization: Token token=<your-api-key-here>`
 
-To authorize via OAuth, there are two broad options: 
+To authorize via OAuth, there are two broad options:
  - provide static client credentials for [OAuth metadata discovery][omd]
  - provide a token directly via a custom header: `Authorization: Bearer <your-bearer-token-here>` (for example, to use an [App OAuth Token][app-token] obtained via `client-credentials` grant.)
 
@@ -49,7 +49,7 @@ Read more about creating OAuth clients for your PagerDuty account [here][pd-oaut
   [app-token]: https://developer.pagerduty.com/docs/app-oauth-token
 
 ### Configure Your MCP Client
-  
+
 #### Cursor
 
 Add to `~/.cursor/mcp.json` or `.cursor/mcp.json`:
