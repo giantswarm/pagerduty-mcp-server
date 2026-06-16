@@ -34,7 +34,7 @@ jobs:
           python-version: "3.x"
 
       - name: astral-sh/setup-uv
-        uses: astral-sh/setup-uv@v6.8.0
+        uses: astral-sh/setup-uv@v8.2.0
         with:
           python-version-file: "pyproject.toml"
           enable-cache: true
@@ -67,7 +67,7 @@ jobs:
 
     steps:
       - name: astral-sh/setup-uv
-        uses: astral-sh/setup-uv@v6.8.0
+        uses: astral-sh/setup-uv@v8.2.0
         with:
           python-version-file: "pyproject.toml"
           enable-cache: true
@@ -98,7 +98,7 @@ jobs:
 
     steps:
       - name: astral-sh/setup-uv
-        uses: astral-sh/setup-uv@v6.8.0
+        uses: astral-sh/setup-uv@v8.2.0
         with:
           python-version-file: "pyproject.toml"
           enable-cache: true
