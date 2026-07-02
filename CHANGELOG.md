@@ -10,6 +10,10 @@ see [`PagerDuty/pagerduty-mcp-server`](https://github.com/PagerDuty/pagerduty-mc
 
 ## [Unreleased]
 
+### Fixed
+
+* Team ownership: team ownership aligned to the canonical `io.giantswarm.application.team: atlas` annotation (was key `application.giantswarm.io/team`, value `team-honeybadger`).
+
 ## [1.0.0] - 2026-06-05
 
 ### Added

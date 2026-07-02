@@ -18,4 +18,4 @@ sources:
   - https://github.com/giantswarm/pagerduty-mcp-server
   - https://github.com/PagerDuty/pagerduty-mcp-server
 annotations:
-  application.giantswarm.io/team: team-honeybadger
+  io.giantswarm.application.team: atlas
