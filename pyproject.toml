@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = "~=3.14.6"
 dependencies = [
     "mcp[cli]~=1.8",
-    "pagerduty~=6.2",
+    "pagerduty~=7.0",
     "typer~=0.27.0",
 ]
 
