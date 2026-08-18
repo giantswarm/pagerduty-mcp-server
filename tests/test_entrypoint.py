@@ -9,18 +9,21 @@ import importlib
 
 
 def test_server_module_imports():
+    """The server module imports and exposes the Typer app."""
     module = importlib.import_module("pagerduty_mcp.server")
 
     assert module.app is not None
 
 
 def test_main_module_imports():
+    """The console-script entrypoint imports and is callable."""
     module = importlib.import_module("pagerduty_mcp.__main__")
 
     assert callable(module.main)
 
 
 def test_cli_help_lists_run_command():
+    """The CLI builds far enough to render its own help."""
     from typer.testing import CliRunner
 
     from pagerduty_mcp.server import app

@@ -2,16 +2,15 @@
 
 import asyncio
 import json
-import logging
 from collections.abc import Sequence
 from typing import Any
 
 from deepdiff import DeepDiff
+from mcp.server.mcpserver import MCPServer
 from pydantic import BaseModel
 
 from pagerduty_mcp.server import add_read_only_tool, add_write_tool
 from pagerduty_mcp.tools import read_tools, write_tools
-from mcp.server.fastmcp import FastMCP
 from pagerduty_mcp_evals.test_cases.agent_competency_test import AgentCompetencyTest
 from tests.evals.llm_clients import BedrockClient, LLMClient, OpenAIClient
 from tests.evals.mcp_tool_tracer import MockedMCPServer
@@ -100,7 +99,7 @@ class TestAgent:
     def _get_available_tools(self) -> list[dict[str, Any]]:
         """Get tool schemas directly from MCP server (like dbt-labs approach)."""
         # Create temp MCP server with same setup as real server
-        temp_mcp = FastMCP("test-server")
+        temp_mcp = MCPServer("test-server")
 
         for tool in read_tools:
             add_read_only_tool(temp_mcp, tool)
@@ -152,12 +151,11 @@ class TestAgent:
                 print(f"Expected tool {expected.name} was not called")
                 return False
             # If parameters are specified, verify at least one call matched them
-            if expected.parameters is not None:
-                if not any(
-                    self._params_are_compatible(expected.parameters, call["parameters"]) for call in tool_calls
-                ):
-                    print(f"Expected tool {expected.name} was not called with the expected parameters")
-                    return False
+            if expected.parameters is not None and not any(
+                self._params_are_compatible(expected.parameters, call["parameters"]) for call in tool_calls
+            ):
+                print(f"Expected tool {expected.name} was not called with the expected parameters")
+                return False
         return True
 
     def _params_are_compatible(self, expected: dict[str, Any], actual: dict[str, Any]) -> bool:
