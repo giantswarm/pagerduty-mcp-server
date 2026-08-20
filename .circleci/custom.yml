@@ -1,0 +1,27 @@
+# Repo-specific CircleCI jobs, deep-merged into the generated .circleci/workflows.yml
+# by the setup workflow in .circleci/config.yml. devctl never touches this file.
+version: 2.1
+
+jobs:
+  unit-tests:
+    docker:
+    - image: cimg/python:3.14.7
+    resource_class: small
+    steps:
+    - checkout
+    - run:
+        name: Install uv
+        command: pip install --no-cache-dir "uv==0.12.5"
+    - run:
+        name: Sync locked dependencies
+        command: uv sync --frozen --all-groups
+    - run:
+        name: Run tests
+        command: uv run pytest tests/ --junitxml=test-results/pytest/results.xml
+    - store_test_results:
+        path: test-results
+
+workflows:
+  build:
+    jobs:
+    - unit-tests

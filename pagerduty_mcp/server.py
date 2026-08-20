@@ -1,17 +1,17 @@
 import logging
 from collections.abc import Callable
-from enum import Enum
+from enum import StrEnum
 
 import typer
-from mcp.server.fastmcp import FastMCP
+from mcp.server.mcpserver import MCPServer
 from mcp.types import ToolAnnotations
 
-from pagerduty_mcp.tools import read_tools, write_tools
 from pagerduty_mcp.context import ContextResolver
 from pagerduty_mcp.context.application_context_strategy import ApplicationContextStrategy
+from pagerduty_mcp.tools import read_tools, write_tools
 
 
-class Transport(str, Enum):
+class Transport(StrEnum):
     """MCP transport protocols supported by the server."""
 
     stdio = "stdio"
@@ -33,7 +33,7 @@ live environment. Always confirm with the user before using any tool marked as d
 """
 
 
-def add_read_only_tool(mcp_instance: FastMCP, tool: Callable) -> None:
+def add_read_only_tool(mcp_instance: MCPServer, tool: Callable) -> None:
     """Add a read-only tool with appropriate safety annotations.
 
     Args:
@@ -46,7 +46,7 @@ def add_read_only_tool(mcp_instance: FastMCP, tool: Callable) -> None:
     )
 
 
-def add_write_tool(mcp_instance: FastMCP, tool: Callable) -> None:
+def add_write_tool(mcp_instance: MCPServer, tool: Callable) -> None:
     """Add a write tool with appropriate safety annotations that indicate it's dangerous.
 
     Args:
@@ -77,11 +77,9 @@ def run(
     """
     ContextResolver.set_strategy(ApplicationContextStrategy())
 
-    mcp = FastMCP(
+    mcp = MCPServer(
         "PagerDuty MCP Server",
         instructions=MCP_SERVER_INSTRUCTIONS,
-        host=host,
-        port=port,
     )
     for tool in read_tools:
         add_read_only_tool(mcp, tool)
@@ -90,4 +88,7 @@ def run(
         for tool in write_tools:
             add_write_tool(mcp, tool)
 
-    mcp.run(transport=transport.value)
+    if transport is Transport.stdio:
+        mcp.run(transport=transport.value)
+    else:
+        mcp.run(transport=transport.value, host=host, port=port)
