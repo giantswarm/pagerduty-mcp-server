@@ -1,6 +1,7 @@
 {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "type": "object",
+    "additionalProperties": false,
     "properties": {
         "affinity": {
             "type": "object",
@@ -8,6 +9,7 @@
         },
         "autoscaling": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "enabled": {
                     "type": "boolean"
@@ -21,31 +23,61 @@
                 "targetCPUUtilizationPercentage": {
                     "type": "integer"
                 }
-            },
-            "additionalProperties": false
+            }
+        },
+        "baseDomain": {
+            "type": "string"
+        },
+        "bootstrapMode": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "chartOperator": {
+            "type": "object",
+            "additionalProperties": true
         },
         "ciliumNetworkPolicy": {
             "type": "object",
+            "additionalProperties": true,
             "properties": {
                 "enabled": {
                     "type": "boolean"
                 }
-            },
-            "additionalProperties": false
+            }
+        },
+        "cluster": {
+            "type": "object",
+            "additionalProperties": true
+        },
+        "clusterCA": {
+            "type": "string"
+        },
+        "clusterCIDR": {
+            "type": "string"
+        },
+        "clusterDNSIP": {
+            "type": "string"
+        },
+        "clusterID": {
+            "type": "string"
         },
         "fullnameOverride": {
             "type": "string"
         },
+        "gcpProject": {
+            "type": "string"
+        },
         "global": {
-            "description": "Global values shared between all subcharts",
-            "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as the `additionalProperties` setting would otherwise collide with Helm's special 'global' values key.",
             "type": [
                 "object",
                 "null"
-            ]
+            ],
+            "description": "Global values shared between all subcharts",
+            "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as the `additionalProperties` setting would otherwise collide with Helm's special 'global' values key."
         },
         "image": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "pullPolicy": {
                     "type": "string"
@@ -56,14 +88,14 @@
                 "tag": {
                     "type": "string"
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "imagePullSecrets": {
             "type": "array"
         },
         "livenessProbe": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "initialDelaySeconds": {
                     "type": "integer"
@@ -73,18 +105,18 @@
                 },
                 "tcpSocket": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "port": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "mcp": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "enableWriteTools": {
                     "type": "boolean"
@@ -98,8 +130,7 @@
                 "transport": {
                     "type": "string"
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "nameOverride": {
             "type": "string"
@@ -110,13 +141,15 @@
         },
         "pagerduty": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "apiHost": {
                     "type": "string"
                 },
                 "existingSecret": {
-                    "description": "namespace mcp-pagerduty \\",
                     "type": "object",
+                    "description": "namespace mcp-pagerduty \\",
+                    "additionalProperties": false,
                     "properties": {
                         "key": {
                             "type": "string"
@@ -124,11 +157,9 @@
                         "name": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "podAnnotations": {
             "type": "object",
@@ -140,6 +171,7 @@
         },
         "podSecurityContext": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "fsGroup": {
                     "type": "integer"
@@ -155,18 +187,21 @@
                 },
                 "seccompProfile": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "type": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
+        },
+        "provider": {
+            "type": "string"
         },
         "readinessProbe": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "initialDelaySeconds": {
                     "type": "integer"
@@ -176,24 +211,25 @@
                 },
                 "tcpSocket": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "port": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "replicaCount": {
             "type": "integer"
         },
         "resources": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "limits": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -204,11 +240,11 @@
                         "memory": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 },
                 "requests": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "cpu": {
                             "type": "string"
@@ -219,20 +255,20 @@
                         "memory": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "securityContext": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "allowPrivilegeEscalation": {
                     "type": "boolean"
                 },
                 "capabilities": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "drop": {
                             "type": "array",
@@ -240,42 +276,41 @@
                                 "type": "string"
                             }
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 },
                 "readOnlyRootFilesystem": {
                     "type": "boolean"
                 },
                 "seccompProfile": {
                     "type": "object",
+                    "additionalProperties": false,
                     "properties": {
                         "type": {
                             "type": "string"
                         }
-                    },
-                    "additionalProperties": false
+                    }
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "service": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
+                "type": {
+                    "type": "string"
+                },
                 "annotations": {
                     "type": "object",
                     "additionalProperties": false
                 },
                 "port": {
                     "type": "integer"
-                },
-                "type": {
-                    "type": "string"
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "serviceAccount": {
             "type": "object",
+            "additionalProperties": false,
             "properties": {
                 "annotations": {
                     "type": "object",
@@ -290,12 +325,13 @@
                 "name": {
                     "type": "string"
                 }
-            },
-            "additionalProperties": false
+            }
+        },
+        "subscriptionID": {
+            "type": "string"
         },
         "tolerations": {
             "type": "array"
         }
-    },
-    "additionalProperties": false
+    }
 }
