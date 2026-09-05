@@ -6,5 +6,4 @@
 # start and the smoke suite cannot pass. Skip smoke (with functional/upgrade) until
 # test-values that provision a dummy secret are added; the job still validates that
 # the chart packages cleanly via build-chart.
-smoke-tests-cluster-type: kind
 skip-steps: [smoke, functional, upgrade]
