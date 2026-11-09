@@ -8,6 +8,7 @@ from mcp.types import ToolAnnotations
 
 from pagerduty_mcp.context import ContextResolver
 from pagerduty_mcp.context.application_context_strategy import ApplicationContextStrategy
+from pagerduty_mcp.icon import SERVER_ICON
 from pagerduty_mcp.tools import read_tools, write_tools
 
 
@@ -80,6 +81,7 @@ def run(
     mcp = MCPServer(
         "PagerDuty MCP Server",
         instructions=MCP_SERVER_INSTRUCTIONS,
+        icons=[SERVER_ICON],
     )
     for tool in read_tools:
         add_read_only_tool(mcp, tool)
