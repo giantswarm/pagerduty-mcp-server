@@ -164,7 +164,7 @@
                 },
                 "existingSecret": {
                     "type": "object",
-                    "description": "namespace mcp-pagerduty \\",
+                    "description": "namespace mcp-pagerduty \\ --from-literal=apiKey=<your-token>",
                     "additionalProperties": false,
                     "properties": {
                         "key": {
